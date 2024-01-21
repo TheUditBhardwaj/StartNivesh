@@ -6,5 +6,8 @@
 
 <img width="236" alt="image" src="https://github.com/TheUditBhardwaj/StartNivesh/assets/114299379/e82b6af8-f95c-471d-bc46-645c1ce26883">
 
+<img width="412" alt="image" src="https://github.com/TheUditBhardwaj/StartNivesh/assets/114299379/7ddfcb4b-9e72-40ad-a2c7-bd30183b9711">
+
+
 <img width="372" alt="image" src="https://github.com/TheUditBhardwaj/StartNivesh/assets/114299379/5e578442-cc3d-4cf1-be52-7d28093fd9c4">
 
