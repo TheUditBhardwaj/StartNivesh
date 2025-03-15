@@ -4,6 +4,11 @@ import 'Screen/auth/splash_screen.dart';
 import 'Screen/auth/login_screen.dart';
 import 'Screen/auth/signup_screen.dart';
 import 'Screen/auth/startup_profile_setup_screen.dart';
+import 'Screen/startup/application_form_screen.dart';
+import 'Screen/startup/file_upload_screen.dart';
+import 'Screen/auth/Complete_setup.dart';
+import 'Screen/auth/investor_profile_setup_screen.dart';
+import 'Screen/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,8 +32,13 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
         '/selectRole': (context) => const RoleSelectionScreen(),
-        '/startup-profile-setup': (context) => const StartupProfileSetupScreen(),
-        // '/investor-profile-setup': (context) => const InvestorProfileSetupScreen(),
+        '/startup-profile-setup': (context) =>  StartupProfileSetupScreen(),
+        '/applicationForm': (context) => const ApplicationFormScreen(),
+        '/fileUpload': (context) => const FileUploadScreen(),
+        '/completeSetup': (context) =>  CompleteSetupScreen(),
+        '/home': (context) =>  HomeScreen(),
+        '/investor-profile-setup': (context) => const InvestorProfileScreen(),
+
         // '/mentor-profile-setup': (context) => const MentorProfileSetupScreen(),
       },
     );

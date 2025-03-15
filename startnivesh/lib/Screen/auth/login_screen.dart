@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _passwordController.text,
         );
 
+
         if (user != null) {
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/selectRole');

@@ -37,7 +37,8 @@ class RoleSelectionScreen extends StatelessWidget {
                 'Startup',
                 'Looking for investment and mentorship',
                 Icons.rocket_launch,
-                    () => Navigator.pushNamed(context, '/startup-profile-setup'),
+                    () =>
+                    Navigator.pushNamed(context, '/startup-profile-setup'),
               ),
               const SizedBox(height: 20),
               _buildRoleCard(
@@ -45,7 +46,8 @@ class RoleSelectionScreen extends StatelessWidget {
                 'Investor',
                 'Interested in investing in startups',
                 Icons.attach_money,
-                    () => Navigator.pushNamed(context, '/investor-profile-setup'),
+                    () =>
+                    Navigator.pushNamed(context, '/investor-profile-setup'),
               ),
               const SizedBox(height: 20),
               _buildRoleCard(
@@ -74,7 +76,10 @@ class RoleSelectionScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.05)],
+            colors: [
+              Colors.white.withOpacity(0.1),
+              Colors.white.withOpacity(0.05)
+            ],
           ),
         ),
         child: Row(
