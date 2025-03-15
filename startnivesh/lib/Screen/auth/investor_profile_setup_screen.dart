@@ -28,8 +28,7 @@ class UpdateExpectations extends InvestorProfileEvent {
 }
 
 class SubmitInvestorProfile extends InvestorProfileEvent {
-  final InvestorProfileState state;
-  SubmitInvestorProfile(this.state);
+  SubmitInvestorProfile();
 }
 
 // BLoC State
@@ -139,11 +138,12 @@ class InvestorProfileBloc extends Bloc<InvestorProfileEvent, InvestorProfileStat
       final response = await http.post(
         Uri.parse('http://127.0.0.1:5001/api/investor'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(event.state.toJson()),
+        body: json.encode(state.toJson()),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         emit(state.copyWith(isSubmitting: false, isSuccess: true));
+        // Success state only, removed isSubmitted flag
       } else {
         final errorData = json.decode(response.body);
         final errorMessage = errorData['message'] ?? 'Failed to submit profile';
@@ -169,24 +169,15 @@ class InvestorProfileScreen extends StatelessWidget {
       create: (context) => InvestorProfileBloc(),
       child: BlocConsumer<InvestorProfileBloc, InvestorProfileState>(
         listener: (context, state) {
+          // Direct navigation when API call is successful
           if (state.isSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Profile submitted successfully!'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            // Navigate to next screen or dashboard
-            // Navigator.pushReplacementNamed(context, '/dashboard');
+            Navigator.pushNamed(context, '/completeSetup');
           }
 
+          // Keeping error handling but without snackbar
           if (state.errorMessage.isNotEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-              ),
-            );
+            // Error handling without snackbar if needed
+            print('Error: ${state.errorMessage}');
           }
         },
         builder: (context, state) {
@@ -275,8 +266,7 @@ class InvestorProfileScreen extends StatelessWidget {
                       _buildSection(
                         context,
                         'Investment Preferences',
-                        'What types of startups' ,
-
+                        'What types of startups',
                         Icons.trending_up,
                         [
                           _buildTextField(
@@ -409,21 +399,22 @@ class InvestorProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context, String title, String subtitle, IconData icon, List<Widget> children) {
+  Widget _buildSection(BuildContext context, String title, String subtitle,
+      IconData icon, List<Widget> children) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.grey.shade900,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: Colors.grey.shade800),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -433,10 +424,10 @@ class InvestorProfileScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.green.shade50,
+                  color: Colors.green.shade900,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, color: Colors.green.shade700, size: 24),
+                child: Icon(icon, color: Colors.green.shade400, size: 24),
               ),
               const SizedBox(width: 12),
               Column(
@@ -454,7 +445,7 @@ class InvestorProfileScreen extends StatelessWidget {
                     subtitle,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white
+                      color: Colors.grey.shade400,
                     ),
                   ),
                 ],
@@ -468,61 +459,13 @@ class InvestorProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(
-      BuildContext context,
+  Widget _buildTextField(BuildContext context,
       String label,
       String value,
       Function(String) onChanged, {
         int maxLines = 1,
         String hint = '',
       }) {
-    return Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    Text(
-    label,
-    style: const TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
-    ),
-    ),
-    const SizedBox(height: 8),
-      TextFormField(
-        initialValue: value,
-        style: const TextStyle(color: Colors.black87),
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          hintText: hint.isNotEmpty ? hint : 'Enter $label',
-          hintStyle: TextStyle(color: Colors.grey.shade400),
-          filled: true,
-          fillColor: Colors.grey.shade50,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey.shade200),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.green.shade400, width: 2),
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        ),
-        onChanged: onChanged,
-      ),
-    ],
-    ),
-    );
-  }
-
-  Widget _buildDropdown(
-      BuildContext context,
-      String label,
-      String value,
-      List<String> options,
-      Function(String?) onChanged,
-      ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
@@ -533,24 +476,73 @@ class InvestorProfileScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Colors.black87,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            initialValue: value,
+
+            style: const TextStyle(color: Colors.white),
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              hintText: hint.isNotEmpty ? hint : 'Enter $label',
+              hintStyle: TextStyle(color: Colors.grey.shade600),
+              filled: true,
+              fillColor: Colors.grey.shade800,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.shade700),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.green.shade400, width: 2),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16, vertical: 16),
+            ),
+            onChanged: onChanged,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdown(BuildContext context,
+      String label,
+      String value,
+      List<String> options,
+      Function(String?) onChanged,) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
             ),
           ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: Colors.grey.shade50,
+              color: Colors.grey.shade800,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: Colors.grey.shade700),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: value.isNotEmpty ? value : null,
-                hint: Text('Select $label', style: TextStyle(color: Colors.grey.shade400)),
+                hint: Text('Select $label',
+                    style: TextStyle(color: Colors.grey.shade600)),
                 isExpanded: true,
-                icon: Icon(Icons.arrow_drop_down, color: Colors.grey.shade700),
-                style: const TextStyle(color: Colors.black87, fontSize: 16),
+                icon: Icon(Icons.arrow_drop_down, color: Colors.grey.shade400),
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+                dropdownColor: Colors.grey.shade800,
                 items: options.map((String option) {
                   return DropdownMenuItem<String>(
                     value: option,
@@ -572,25 +564,32 @@ class InvestorProfileScreen extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.green.shade700,
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           elevation: 2,
           minimumSize: const Size(200, 56),
         ),
-        onPressed: () {
+        onPressed: state.isSubmitting ? null : () {
+          // Skip validation if you want to completely bypass everything
+          // Otherwise keep minimal validation as needed
           if (state.name.isEmpty || state.email.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please fill in required fields'),
-                backgroundColor: Colors.red,
-              ),
-            );
-            return;
+            // Silently handle validation if needed
+            print('Empty fields detected but continuing anyway');
           }
-          context.read<InvestorProfileBloc>().add(SubmitInvestorProfile(state));
+
+          // Direct navigation without waiting for API response
+          Navigator.pushNamed(context, '/completeSetup');
+
+          // Optionally still submit data in background
+          context.read<InvestorProfileBloc>().add(SubmitInvestorProfile());
         },
         child: state.isSubmitting
-            ? const CircularProgressIndicator(color: Colors.white)
+            ? const SizedBox(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+        )
             : const Row(
           mainAxisSize: MainAxisSize.min,
           children: [

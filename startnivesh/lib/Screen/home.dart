@@ -81,13 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
               items: _buildFeaturedStartupCards(),
               options: CarouselOptions(
                 height: 220,
-                autoPlay: true,
+                autoPlay: false,
                 enlargeCenterPage: true,
                 viewportFraction: 0.8,
                 autoPlayInterval: const Duration(seconds: 5),
+                aspectRatio: 16/9, // Add this to maintain aspect ratio
+                enlargeFactor: 0.3, // Increases the size of the center item
               ),
             ),
-
             const SizedBox(height: 20),
 
             // 🌎 Trending Now
