@@ -81,12 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
               items: _buildFeaturedStartupCards(),
               options: CarouselOptions(
                 height: 220,
-                autoPlay: false,
+                autoPlay: true,  // Enable autoplay for better user experience
                 enlargeCenterPage: true,
-                viewportFraction: 0.8,
+                viewportFraction: 0.85,  // Show slightly more of the card
                 autoPlayInterval: const Duration(seconds: 5),
-                aspectRatio: 16/9, // Add this to maintain aspect ratio
-                enlargeFactor: 0.3, // Increases the size of the center item
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                pauseAutoPlayOnTouch: true,
+                enlargeFactor: 0.2,  // Slightly reduce the enlargement effect
+                enableInfiniteScroll: true,
               ),
             ),
             const SizedBox(height: 20),
@@ -131,7 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 24),
 
-            // 🚀 Call-to-Action Buttons
             _buildActionButtons(),
 
             const SizedBox(height: 24),
@@ -325,10 +326,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: Colors.blue,
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                          minimumSize: const Size(0, 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+                          minimumSize: const Size(0, 10),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                         child: const Text("View Profile", style: TextStyle(fontWeight: FontWeight.bold)),
