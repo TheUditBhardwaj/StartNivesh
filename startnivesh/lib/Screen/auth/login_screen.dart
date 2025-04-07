@@ -45,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         if (_dbService == null) {
           throw Exception("Database service is not initialized");
+
         }
 
         final user = await _dbService!.loginUser(

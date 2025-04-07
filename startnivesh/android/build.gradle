@@ -2,13 +2,16 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter() // Add this in case any dependency needs it
     }
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }

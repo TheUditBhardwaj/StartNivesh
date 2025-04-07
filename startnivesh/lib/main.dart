@@ -10,6 +10,7 @@ import 'Screen/auth/Complete_setup.dart';
 import 'Screen/auth/investor_profile_setup_screen.dart';
 import 'Screen/home.dart';
 import 'Screen/auth/mentor_profile_setup_screen.dart';
+import 'Screen/homeInvestor.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -36,10 +37,10 @@ class MyApp extends StatelessWidget {
         '/applicationForm': (context) => const ApplicationFormScreen(),
         '/fileUpload': (context) => const FileUploadScreen(),
         '/completeSetup': (context) =>  CompleteSetupScreen(),
-        '/home': (context) =>  HomeScreen(),
         '/investor-profile-setup': (context) => const InvestorProfileScreen(),
         '/mentor-profile-setup': (context) => const MentorProfileScreen(),
-
+        '/home': (context) =>  HomeScreen(),
+        '/investor_screen': (context) => const InvestorsScreen(),
 
       },
     );

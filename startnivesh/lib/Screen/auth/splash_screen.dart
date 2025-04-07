@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:startnivesh/main.dart';
 import 'package:startnivesh/Screen/auth/login_screen.dart';
+import 'role_selection_screen.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
@@ -56,7 +57,8 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+          //pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+          pageBuilder: (context, animation, secondaryAnimation) => const RoleSelectionScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var curve = Curves.easeInOut;
             var curveTween = CurveTween(curve: curve);
