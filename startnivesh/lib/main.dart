@@ -10,7 +10,10 @@ import 'Screen/auth/Complete_setup.dart';
 import 'Screen/auth/investor_profile_setup_screen.dart';
 import 'Screen/home.dart';
 import 'Screen/auth/mentor_profile_setup_screen.dart';
-import 'Screen/homeInvestor.dart';
+import 'Screen/Investor_bar.dart';
+import 'Screen/home_investor.dart';
+import 'Screen/IComplete_setup.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         '/mentor-profile-setup': (context) => const MentorProfileScreen(),
         '/home': (context) =>  HomeScreen(),
         '/investor_screen': (context) => const InvestorsScreen(),
-
+        '/home_investor': (context) =>  IHomeScreen(),
+        '/IncompleteSetup': (context) =>  ICompleteSetupScreen(),
       },
     );
   }

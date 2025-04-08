@@ -27,27 +27,26 @@ class MyApp extends StatelessWidget {
           surface: const Color(0xFF1E1E1E),
         ),
       ),
-      home: const HomeScreen(),
+      home: const IHomeScreen(),
     );
   }
 }
 
 // Home Screen
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class IHomeScreen extends StatefulWidget {
+  const IHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<IHomeScreen> createState() => _IHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _IHomeScreenState extends State<IHomeScreen> {
   int _currentNavIndex = 0;
   int _currentCarouselIndex = 0;
 
   // List of screens to navigate to
   final List<Widget> _screens = [
     const HomeContent(),
-    const InvestorsScreen(),
     const MentorScreen(),
     const ProfileScreen(),
   ];
@@ -261,17 +260,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   label: 'Home',
                 ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.handshake_outlined),
-                  ),
-                  activeIcon: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.handshake),
-                  ),
-                  label: 'Investors',
-                ),
+                // BottomNavigationBarItem(
+                //   icon: Padding(
+                //     padding: const EdgeInsets.only(bottom: 4),
+                //     child: Icon(Icons.handshake_outlined),
+                //   ),
+                //   activeIcon: Padding(
+                //     padding: const EdgeInsets.only(bottom: 4),
+                //     child: Icon(Icons.handshake),
+                //   ),
+                //   label: 'Investors',
+                // ),
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),

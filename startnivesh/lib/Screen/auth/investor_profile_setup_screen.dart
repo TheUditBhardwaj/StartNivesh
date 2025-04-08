@@ -579,7 +579,7 @@ class InvestorProfileScreen extends StatelessWidget {
           }
 
           // Direct navigation without waiting for API response
-          Navigator.pushNamed(context, '/completeSetup');
+          Navigator.pushNamed(context, '/IncompleteSetup');
 
           // Optionally still submit data in background
           context.read<InvestorProfileBloc>().add(SubmitInvestorProfile());
