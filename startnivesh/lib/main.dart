@@ -13,8 +13,22 @@ import 'Screen/auth/mentor_profile_setup_screen.dart';
 import 'Screen/Investor_bar.dart';
 import 'Screen/home_investor.dart';
 import 'Screen/IComplete_setup.dart';
+import 'Screen/angelInvestor.dart';
+import 'Screen/venture.dart';
+import 'Screen/corprate.dart';
+import 'Screen/internation.dart';
+import 'package:startnivesh/Screen/mentor_home.dart';
+import 'Screen/Mcomplete.dart';
+import 'Screen/news.dart';
+import 'Screen/homeContent.dart';
+import 'Screen/corprate.dart';
+import 'Screen/chatbot.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+
+void main() async {  // Added async keyword here
+  WidgetsFlutterBinding.ensureInitialized();  // Add this line to ensure Flutter is initialized
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -46,6 +60,15 @@ class MyApp extends StatelessWidget {
         '/investor_screen': (context) => const InvestorsScreen(),
         '/home_investor': (context) =>  IHomeScreen(),
         '/IncompleteSetup': (context) =>  ICompleteSetupScreen(),
+        '/angel-investors': (context) => const AngelInvestorsScreen(userId: "founder-uid-123"),
+        '/corporate-investors': (context) => const CorporateeInvestorsScreen(userId: "founder-uid-123"),
+        '/venture-capital': (context) => const VentureCapitalScreen(userId: "founder-uid-123"),
+        '/international-investors': (context) => const InternationallInvestorsScreen(userId: "founder-uid-123"),
+        '/mentor-home': (context) => const MHomeScreen(),
+        '/mentor-complete-setup': (context) =>  MCompleteSetupScreen(),
+        '/news': (context) => const NewsWidget(),
+        '/homeContent': (context) => const HomeContentt(),
+        '/chatbot': (context) => const ChatBotScreen(),
       },
     );
   }

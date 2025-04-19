@@ -3,74 +3,89 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class MentorScreen extends StatelessWidget {
-  final String userId; // Pass current logged-in userId here
+class CorporateeInvestorsScreen extends StatelessWidget {
+  final String userId;
 
-  const MentorScreen({super.key, required this.userId});
+  const CorporateeInvestorsScreen({super.key, required this.userId});
+
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Mentorship",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            "Connect with experienced mentors to guide your startup",
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          _buildMentorCard(
-            context: context,
-            name: "Alex Johnson",
-            uniqueId: "alex-johnson",
-            expertise: "Business Strategy",
-            image: "assets/images/appLogo.png",
-            rating: 4.9,
-          ),
-          _buildMentorCard(
-            context: context,
-            name: "Sar Williams",
-            uniqueId: "sarah-williams",
-            expertise: "Marketing & Growth",
-            image: "assets/images/appLogo.png",
-            rating: 4.8,
-          ),
-          _buildMentorCard(
-            context: context,
-            name: "Raj Patel",
-            uniqueId: "raj-patel",
-            expertise: "Technology & Engineering",
-            image: "assets/images/appLogo.png",
-            rating: 5.0,
-          ),
-          _buildMentorCard(
-            context: context,
-            name: "Lisa Chen",
-            uniqueId: "lisa-chen",
-            expertise: "Finance & Fundraising",
-            image: "assets/images/appLogo.png",
-            rating: 4.7,
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text(" Angel Investor", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.account_circle_outlined),
+            color: Colors.grey[900],
+            onSelected: (value) {
+              if (value == 'change_account') {
+                // Add your logout or switch account logic here
+                Navigator.pushReplacementNamed(context, '/login');
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'change_account',
+                child: Text("Change Account", style: TextStyle(color: Colors.white)),
+              ),
+            ],
           ),
         ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Connect with experienced mentors to guide your startup",
+              style: TextStyle(color: Colors.grey[400], fontSize: 16),
+            ),
+            const SizedBox(height: 24),
+
+            _buildMentorCard(
+              context: context,
+              name: "Alex Johnson",
+              uniqueId: "alex-johnson",
+              expertise: "Business Strategy",
+              image: "assets/images/appLogo.png",
+              rating: 4.9,
+            ),
+            _buildMentorCard(
+              context: context,
+              name: "Sarah Williams",
+              uniqueId: "sarah-williams",
+              expertise: "Marketing & Growth",
+              image: "assets/images/appLogo.png",
+              rating: 4.8,
+            ),
+            _buildMentorCard(
+              context: context,
+              name: "Raj Patel",
+              uniqueId: "raj-patel",
+              expertise: "Technology & Engineering",
+              image: "assets/images/appLogo.png",
+              rating: 5.0,
+            ),
+            _buildMentorCard(
+              context: context,
+              name: "Lisa Chen",
+              uniqueId: "lisa-chen",
+              expertise: "Finance & Fundraising",
+              image: "assets/images/appLogo.png",
+              rating: 4.7,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // Generate a random call ID
   String _generateRandomCallId() {
     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
     final random = Random();
@@ -87,6 +102,8 @@ class MentorScreen extends StatelessWidget {
     required String image,
     required double rating,
   }) {
+
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
@@ -224,8 +241,8 @@ class MentorScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
+  }
   void _showCallDialog(BuildContext context, String mentorName) {
     final TextEditingController callIdController = TextEditingController();
 
@@ -325,4 +342,5 @@ class MentorScreen extends StatelessWidget {
       },
     );
   }
+
 }

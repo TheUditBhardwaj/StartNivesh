@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class InvestorsScreen extends StatelessWidget {
@@ -31,28 +30,36 @@ class InvestorsScreen extends StatelessWidget {
 
           // Investor Categories
           _buildCategoryCard(
+            context: context,
             icon: Icons.account_balance,
             title: "Angel Investors",
             description: "Early stage funding for startups",
             color: Colors.blue,
+            route: '/angel-investors',
           ),
           _buildCategoryCard(
+            context: context,
             icon: Icons.business_center,
             title: "Venture Capital Firms",
             description: "Series funding for growing startups",
             color: Colors.purple,
+            route: '/venture-capital',
           ),
           _buildCategoryCard(
+            context: context,
             icon: Icons.people,
             title: "Corporate Investors",
             description: "Strategic partnerships and investments",
             color: Colors.orange,
+            route: '/corporate-investors',
           ),
           _buildCategoryCard(
+            context: context,
             icon: Icons.public,
             title: "International Investors",
             description: "Global funding opportunities",
             color: Colors.green,
+            route: '/international-investors',
           ),
         ],
       ),
@@ -60,10 +67,12 @@ class InvestorsScreen extends StatelessWidget {
   }
 
   Widget _buildCategoryCard({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required String description,
     required Color color,
+    required String route,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -114,6 +123,7 @@ class InvestorsScreen extends StatelessWidget {
         ),
         onTap: () {
           // Navigate to specific investor category
+          Navigator.pushNamed(context, route);
         },
       ),
     );

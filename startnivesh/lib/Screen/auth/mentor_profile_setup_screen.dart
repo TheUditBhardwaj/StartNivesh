@@ -567,7 +567,7 @@ class MentorProfileScreen extends StatelessWidget {
         ),
         onPressed: state.isSubmitting ? null : () {
           // Direct navigation to completeSetup screen without waiting for submission
-          Navigator.pushNamed(context, '/completeSetup');
+          Navigator.pushNamed(context, '/mentor-complete-setup');
 
           // Optionally submit data in background if needed
           context.read<MentorProfileBloc>().add(SubmitMentorProfile());

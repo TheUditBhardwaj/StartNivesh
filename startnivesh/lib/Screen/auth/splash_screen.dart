@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          //pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+          // pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
           pageBuilder: (context, animation, secondaryAnimation) => const RoleSelectionScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var curve = Curves.easeInOut;
@@ -103,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: Opacity(
                 opacity: 0.1, // Reduced opacity
                 child: Image.asset(
-                  "assets/images/pattern.png", // Optional, can be removed
+                  "assets/images/patt.png", // Optional, can be removed
                   fit: BoxFit.cover,
                 ),
               ),
