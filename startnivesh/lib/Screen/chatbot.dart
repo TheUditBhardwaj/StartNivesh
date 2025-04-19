@@ -17,7 +17,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   final List<ChatMessage> _messages = [];
   bool _isTyping = false;
 
-
+  final String apiKey = '';
   final String apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
   final List<String> _suggestions = [
